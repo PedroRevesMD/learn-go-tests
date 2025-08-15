@@ -1,14 +1,16 @@
 package iteration
 
-import "strings"
+import (
+	"errors"
+	"strings"
+)
 
-const COUNTER = 5
+var ErrNegativeNumbers = errors.New("Negative Numbers are not allowed")
 
-func Repeat(character string) string {
-	var finalStirng strings.Builder
-	for range COUNTER {
-		finalStirng.WriteString(character)
+func Repeat(character string, counter int) (string, error) {
+	if counter < 0 {
+		return "", ErrNegativeNumbers
 	}
 
-	return finalStirng.String()
+	return strings.Repeat(character, counter), nil
 }
